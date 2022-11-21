@@ -1,0 +1,89 @@
+
+/* Estilos de logotipo */
+.logo{
+    width:100%;
+    height: 60px;
+}
+/* Texto del logotipo */
+.logo-text{
+    color:#999999;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 1.2em;
+/*     position: absolute;  */
+}
+/* Texto del navbar iconos */
+.textHeader{
+    margin-top: 4px;
+    font-size: 0.6rem;
+}
+/* Boton de navbar */
+.btn-nav{
+    background-color: transparent;
+    border: none;
+}
+/* Color del navbar */
+.bg-nav{
+    background-color: #C9C5B3;
+}
+/* Tamaño del navbar */
+.navbar{
+    width: auto;
+    height:80px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+/* Estilos de los iconos del navbar */
+.nav-i{
+    font-size: 2.2rem;
+    color: #000000;
+}
+/* Scroll personalizado */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rbga(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #1b1b1b;
+}
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: #1b1b1b;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.9);
+    background-color: #C9C5B3;
+}
+/* Container de productos */
+.bg-container{
+    background-color: #f9f6EB;
+    width: auto;
+    height: 800px;
+}
+/* Media query para el ajuste de los elementos */
+@media only screen and (min-width: 0px) and (max-width: 575px) {
+    /* Estilos de logotipo */
+.logo{
+    height: 45px;
+}
+/* Texto del logotipo */
+.logo-text{
+    font-size: 0.8rem;
+/*     position: absolute;  */
+}
+    /* Texto de los iconos navbar */
+    .textHeader{
+        font-size: 0.3rem;
+    }
+    /* Tamaño de los iconos del navbar */
+    .navbar-nav{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .nav-i{
+        font-size: 1.8rem;
+        margin-right: 25px !important;
+    }
+}
+

@@ -1,0 +1,10 @@
+/* Universal reset style */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* Scrolling effect */
+html {
+  scroll-behavior: smooth;
+}
