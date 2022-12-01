@@ -4,9 +4,7 @@ import React, { useState } from 'react';
 import logo from "../../Imagenes/logo.svg";
 /* Importacion de componentes */
 import Cart from "./CartWidget";
-import Ubicacion from './UbiWidget';
-import Favoritos from './FavWidget';
-import Login from './LoginWidget';
+import ButtonWidget from '../Botones/ButtonWidget';
 
 const NAV = () => {
   let [flag,setFlag] = useState(true);//variable de estado para el cart widget
@@ -23,16 +21,16 @@ const NAV = () => {
         <div className="d-flex mx-sm-auto me-md-2">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <Favoritos nombre="FAVORITOS" evento={() => { alert("Abriste la sección de favoritos") }} />
+              <ButtonWidget nombre="FAVORITOS" evento={() => { alert("Abriste la sección de favoritos") }} tipo="nav-i fa-solid fa-heart-circle-plus" />
             </li>
             <li className="nav-item">
               <Cart nombre="CARRITO" evento={agregarCarrito} flag={flag}/>
             </li>
             <li className="nav-item">
-              <Ubicacion nombre="UBICACIÓN" evento={() => { alert("Abriste la sección de ubicación") }} />
+              <ButtonWidget nombre="UBICACIÓN" evento={() => { alert("Abriste la sección de ubicación") }} tipo="nav-i fa-solid fa-location-dot"/>
             </li>
             <li className="nav-item">
-              <Login nombre="LOG-IN" evento={() => { alert("Abriste la sección de iniciar sesión") }} />
+              <ButtonWidget nombre="LOG-IN" evento={() => { alert("Abriste la sección de iniciar sesión") }} tipo="nav-i fa-solid fa-right-to-bracket"/>
             </li>
           </ul>
         </div>
