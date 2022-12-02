@@ -35,7 +35,9 @@ const ItemListContainer = () => {
         
     return (
         <div className="container-fluid bg-container">
-            <ItemList columnas="col-3 mt-5" productos={productos}/>
+            <div className='row'>
+            <ItemList columnas="col-md-5 col-lg-3 mt-5" productos={productos}/>
+            </div>
         </div>
     );
 }

@@ -1,4 +1,4 @@
-/* Widget del favoritos */
+/* Widget las opciones en el nav */
 const ButtonWidget = (props) => {
     return (
         <>

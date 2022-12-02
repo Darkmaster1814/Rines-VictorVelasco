@@ -5,7 +5,7 @@ import logo from "../../Imagenes/logo.svg";
 /* Importacion de componentes */
 import { Link } from 'react-router-dom';//libreria de link para las rutas
 import Cart from "./CartWidget";
-import ButtonWidget from '../Botones/ButtonWidget';
+import ButtonWidget from './ButtonWidget';
 
 const NAV = () => {
   let [flag, setFlag] = useState(true);//variable de estado para el cart widget
@@ -23,17 +23,17 @@ const NAV = () => {
         </Link>
         <div className="d-flex mx-sm-auto me-md-2">
           <ul className="navbar-nav">
-            <Link to="/Aceites">
+            <Link to="/category/Aceites">
               <li className="nav-item">
                 <ButtonWidget nombre="ACEITES" tipo="nav-i fa-solid fa-oil-can" />
               </li>
             </Link>
-            <Link to="/Accesorios">
+            <Link to="/category/Accesorios">
               <li className="nav-item">
                 <ButtonWidget nombre="ACCESORIOS" tipo="nav-i fa-solid fa-screwdriver-wrench" />
               </li>
             </Link>
-            <Link to='/Rines'>
+            <Link to='/category/Rines'>
               <li className="nav-item">
                 <ButtonWidget nombre="RINES" tipo="nav-i fa-solid fa-truck-monster" />
               </li>

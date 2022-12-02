@@ -17,6 +17,10 @@
     margin-top: 4px;
     font-size: 0.6rem;
 }
+/* color del boton al posicionar el raton */
+.btn:hover{
+    color: #AB3E2A;
+}
 /* Boton de navbar */
 .btn-nav{
     background-color: transparent;
@@ -25,6 +29,10 @@
 /* Color del navbar */
 .bg-nav{
     background-color: #C9C5B3;
+}
+/* color del contenedor de item */
+.bg-item{
+    background-color: #FFFFFF;
 }
 /* Tamaño del navbar */
 .navbar{
