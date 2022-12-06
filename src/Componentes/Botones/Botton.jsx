@@ -1,3 +1,4 @@
+/* Botones para todos los componentes y widgets */
 const Botton = (props) => {
     return (
         <>

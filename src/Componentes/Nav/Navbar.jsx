@@ -6,7 +6,6 @@ import logo from "../../Imagenes/logo.svg";
 import { Link } from 'react-router-dom';//libreria de link para las rutas
 import Cart from "./CartWidget";
 import ButtonWidget from './ButtonWidget';
-
 const NAV = () => {
   let [flag, setFlag] = useState(true);//variable de estado para el cart widget
   let agregarCarrito = () => {
