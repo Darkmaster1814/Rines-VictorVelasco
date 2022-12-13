@@ -37,9 +37,11 @@ const NAV = () => {
                 <ButtonWidget nombre="RINES" tipo="nav-i fa-solid fa-truck-monster" />
               </li>
             </Link>
+            <Link to='/cart'>
             <li className="nav-item">
               <Cart nombre="CARRITO" evento={agregarCarrito} flag={flag} />
             </li>
+            </Link>
             <li className="nav-item">
               <ButtonWidget nombre="LOG-IN" evento={() => { alert("Abriste la sección de iniciar sesión") }} tipo="nav-i fa-solid fa-right-to-bracket" />
             </li>
