@@ -1,5 +1,4 @@
 /* ===============================COMPONENTE DE BARRA DE NAVEGACIÓN======================== */
-import React, { useState } from 'react';
 /* Importación de imagenes */
 import logo from "../../Imagenes/logo.svg";
 /* Importacion de componentes */
@@ -7,10 +6,6 @@ import { Link } from 'react-router-dom';//libreria de link para las rutas
 import Cart from "./CartWidget";
 import ButtonWidget from './ButtonWidget';
 const NAV = () => {
-  let [flag, setFlag] = useState(true);//variable de estado para el cart widget
-  let agregarCarrito = () => {
-    setFlag(false);
-  }
   return (
     <>
       <nav className="navbar navbar-expand-sm bg-nav rounded-4 mt-4 sticky-top">
@@ -39,7 +34,7 @@ const NAV = () => {
             </Link>
             <Link to='/cart'>
             <li className="nav-item">
-              <Cart nombre="CARRITO" evento={agregarCarrito} flag={flag} />
+              <Cart nombre="CARRITO" />
             </li>
             </Link>
             <li className="nav-item">
