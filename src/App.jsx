@@ -9,6 +9,7 @@ import ItemListContainer from './Componentes/Container/ItemListContainer'
 import ItemDetailContainer from './Componentes/Container/ItemDetailContainer';
 import Footer from './Componentes/Footer/Footer';
 import CartProvider from './Context/CartProvider';//Importamos el contexto del carrito
+import CartContainer from './Componentes/Cart/CartContainer';
 function App() {
   return (
     <>
@@ -18,6 +19,7 @@ function App() {
       <Route exact path='/' element={<ItemListContainer/>}/>
       <Route path='/category/:categorias' element={<ItemListContainer/>}/>
       <Route path='/item/:id' element={<ItemDetailContainer/>}/>
+      <Route path='/cart' element={<CartContainer/>}/>
     </Routes>
     </CartProvider>
     <Footer/>

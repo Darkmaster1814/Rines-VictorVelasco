@@ -1,5 +1,7 @@
 /* Componente de cantidad en cada descripción de carrito para agregar mas o menos productos */
 import Botton from '../Botones/Botton';
+import BottonClassic from "../Botones/BottonClassic";
+import { Link } from 'react-router-dom';//libreria de link para las rutas
 import { useState } from "react";
 import { useEffect } from 'react';
 import { useContext } from 'react';//Importamos el contexto
@@ -49,6 +51,7 @@ const ItemCount = (props) => {
                 <div className="row">
                     <div className="col-6"><p> QTY: <Botton clase="fa-solid fa-plus" evento={() => { aumentarCarrito() }} /> {contador} <Botton clase="fa-solid fa-minus" evento={() => { disminuirCarrito() }} /></p></div>
                     <div className='col-6'><Botton clase="fa-solid fa-cart-shopping bg-cart-item fs-3" evento={() => { agregarCarrito() }} /></div>
+                    <div className="col-md-7"><Link to='/cart'><BottonClassic clase="container-fluid rounded bg-item" texto="COMPRAR" evento={()=>{agregarCarrito()}}/></Link></div>
                 </div>
             </div>
         </div>)

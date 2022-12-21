@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';//hook de useefect y usestate
 import { useParams } from 'react-router-dom';//hook para mandar props a un router
 import ItemDetail from './ItemDetail';
+import Loader from '../Loader/Loader';
 const ItemDetailContainer = () => {
         /* Item del articulo a ver sus detalles */
         const [item, setItem] = useState(null);
@@ -15,7 +16,8 @@ const ItemDetailContainer = () => {
                         .then((r) => setItem(r)).catch((e) => console.log("Ocurrio un error de API" + e));
         }, [id])
         return (<div className="container-fluid bg-item">
-                <ItemDetail producto={item}></ItemDetail>
+                {item === null ? <Loader columnas="col-8 mt-5" /> :
+                        <ItemDetail producto={item} />}
         </div>)
 }
 

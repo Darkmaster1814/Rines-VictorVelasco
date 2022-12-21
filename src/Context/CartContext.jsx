@@ -6,7 +6,9 @@ let cartContext=createContext({
     agregarCarrito: ()=>{},
     existeEnCarrito: ()=>{},
     removerDeCarrito: ()=>{},
-    borrarCarrito:()=>{}
+    borrarCarrito:()=>{},
+    obtenerPorId:()=>{},
+    cantidadEnCarrito:()=>{}
 });//Con default value de array vacio
 
 export default cartContext;

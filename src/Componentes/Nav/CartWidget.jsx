@@ -5,11 +5,11 @@ import cartContext from '../../Context/CartContext';//Para obtener cuando se agr
 /* Widget del carrito */
 const Cart = ({ nombre, evento }) => {
     /* Elementos para cambiar el estado del icono cuando no hay articulos en el carrito es false*/
-    const carrito=useContext(cartContext);
+    const productos=useContext(cartContext);
     const [flag,setFlag]=useState(false);
     useEffect(()=>{
-        carrito.carrito.length===0 ? setFlag(false):setFlag(true);
-    },[carrito.carrito,flag]);
+        productos.carrito.length===0 ? setFlag(false):setFlag(true);
+    },[productos.carrito,flag]);
     return (
         <>
             <button className="btn-nav mt-4 me-md-5" onClick={evento}>
