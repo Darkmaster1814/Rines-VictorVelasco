@@ -6,14 +6,14 @@ import cartContext from '../../Context/CartContext';//Para obtener cuando se agr
 const Cart = ({ nombre, evento }) => {
     /* Elementos para cambiar el estado del icono cuando no hay articulos en el carrito es false*/
     const productos=useContext(cartContext);
-    const [flag,setFlag]=useState(false);
+    const [flag,setFlag]=useState("");
     useEffect(()=>{
-        productos.carrito.length===0 ? setFlag(false):setFlag(true);
-    },[productos.carrito,flag]);
+        productos.cantidadEnCarrito(productos.carrito)!==0 ? setFlag(<i className="nav-i fa-sharp fa-solid fa-cart-plus text-center"><p className="textHeader">{nombre}</p></i>):setFlag(<i className="nav-i fa-sharp fa-solid fa-cart-arrow-down text-center"><p className="textHeader">{nombre}</p></i>);
+    },[productos.carrito]);
     return (
         <>
             <button className="btn-nav mt-4 me-md-5" onClick={evento}>
-                {flag ? <i className="nav-i fa-sharp fa-solid fa-cart-plus text-center"><p className="textHeader">{nombre}</p></i> : <i className="nav-i fa-sharp fa-solid fa-cart-arrow-down text-center"><p className="textHeader">{nombre}</p></i>}
+                {flag}
             </button>
         </>
     );

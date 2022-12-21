@@ -1,12 +1,10 @@
 /* Provider para el contexto dinamico de carrito de compras */
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect,useState } from "react";
 import cartContext from "./CartContext";
 
 const Provider = ({ children }) => {
     /* Variable para agregar al carrito la onAdd */
     const [carrito, setCarrito] = useState([]);
-    console.log("El carrito", carrito)
     /* Función agregar al arreglo de carrito */
     const addItem = (item) => {
         /* Si el carrito tiene item entonces actualiza la cantidad */
@@ -20,7 +18,6 @@ const Provider = ({ children }) => {
         else {
             setCarrito((items) => [...items, item]);//Agrega al arr carrito un nuevo objeto item
         }
-
         console.log(Object.keys(carrito).length + 1)//Para saber el tamaño del array del carrito
     }
 
@@ -49,6 +46,12 @@ const Provider = ({ children }) => {
     const clearCart = () => { 
         setCarrito([]);
     } 
+    /* Funcion para calcular subtotal del carrito */
+    const subTotal=()=>{
+        let total=0;
+        carrito.forEach((item)=>total+=item.cantidad*item.precio);
+        return total;
+    }
 
     /* actualizar el storage local con el JSON */
     const actualizarProductosStorage = (carrito) => {
@@ -63,13 +66,14 @@ const Provider = ({ children }) => {
         /* Effect para hacer un update al storage cada que el carrito cambia */
         useEffect(() => actualizarProductosStorage(carrito), [carrito])
     return (<cartContext.Provider value={{
-        carrito,
+        carrito: carrito,
         agregarCarrito: addItem,
         existeEnCarrito: isInCart,
         removerDeCarrito: removeFromCart,
         borrarCarrito: clearCart,
         obtenerPorId: getProduct,
-        cantidadEnCarrito: QtyOfProducts
+        cantidadEnCarrito: QtyOfProducts,
+        calcularSubTotal: subTotal
     }}>
         {children}
     </cartContext.Provider>)

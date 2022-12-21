@@ -8,7 +8,8 @@ let cartContext=createContext({
     removerDeCarrito: ()=>{},
     borrarCarrito:()=>{},
     obtenerPorId:()=>{},
-    cantidadEnCarrito:()=>{}
+    cantidadEnCarrito:()=>{},
+    calcularSubTotal:()=>{}
 });//Con default value de array vacio
 
 export default cartContext;
