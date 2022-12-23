@@ -33,14 +33,14 @@ const NAV = () => {
               </li>
             </Link>
             <Link to='/cart'>
-            <li className="nav-item">
-              <Cart nombre="CARRITO" />
-            </li>
+              <li className="nav-item">
+                <Cart nombre="CARRITO" />
+              </li>
             </Link>
             <Link to='/login'>
-            <li className="nav-item">
-              <ButtonWidget nombre="LOG-IN" tipo="nav-i fa-solid fa-right-to-bracket" />
-            </li>
+              <li className="nav-item">
+                <ButtonWidget nombre="LOG-IN" tipo="nav-i fa-solid fa-right-to-bracket" />
+              </li>
             </Link>
           </ul>
         </div>

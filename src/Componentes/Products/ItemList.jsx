@@ -8,11 +8,11 @@ const ItemList = (props) => {
     /* Creación de variable de estado para almacenar el json de productos */
     const [productos, setProductos] = useState(null);
     /* Creación de variable de estado para construir petición de json productos */
-    const[categoria,setCategoria]=useState("productos")
+    const [categoria, setCategoria] = useState("productos")
     /* useEffect para montar el string de la petición cada que cambie el params */
-    useEffect(()=>{
-        categorias===undefined? setCategoria("productos"): setCategoria(`productos?categoria=${categorias}`);
-    },[categorias]);
+    useEffect(() => {
+        categorias === undefined ? setCategoria("productos") : setCategoria(`productos?categoria=${categorias}`);
+    }, [categorias]);
     /* Obtención asincronica de productos usando el mount para renderizar al comienzo una vez recibida la info desde mockapi */
     useEffect(() => {
         fetch(`https://63881b6ed94a7e5040931cad.mockapi.io/${categoria}`)
@@ -29,9 +29,9 @@ const ItemList = (props) => {
     }
     /* se va ir renderizando diferentes cards */
     return (<div className="row">
-    { productos=== null ? <Loader columnas="col-8 mt-5"/> :
+        {productos === null ? <Loader columnas="col-8 mt-5" /> :
             <div className='row'>
-            {renderCards()}
+                {renderCards()}
             </div>}</div>
     );
 }

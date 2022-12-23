@@ -5,8 +5,8 @@ import './CSS/App.css';
 /* Importaión de componentes */
 import Navbar from './Componentes/Nav/Navbar';
 import {Routes,Route} from 'react-router-dom';//Importar react router
-import ItemListContainer from './Componentes/Container/ItemListContainer'
-import ItemDetailContainer from './Componentes/Container/ItemDetailContainer';
+import ItemListContainer from './Componentes/Products/ItemListContainer'
+import ItemDetailContainer from './Componentes/Products/ItemDetailContainer';
 import Footer from './Componentes/Footer/Footer';
 import CartProvider from './Context/CartProvider';//Importamos el contexto del carrito
 import CartContainer from './Componentes/Cart/CartContainer';

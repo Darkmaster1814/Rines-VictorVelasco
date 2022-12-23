@@ -11,7 +11,7 @@ const ItemDetail = (props) => {
                     <div className="col-md-11 mt-4 mb-4"><p className="text-justify">{props.producto?.descripcion}</p></div>
                     <hr />
                     {<ItemCount producto={props?.producto} />}
-                    
+
                 </div>
             </div>
         </div>

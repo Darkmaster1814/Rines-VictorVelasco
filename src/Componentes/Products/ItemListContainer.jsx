@@ -1,7 +1,6 @@
 /*======================Item de conenedor para productos=================================================*/
 import ItemList from './ItemList';
 const ItemListContainer = () => {
-
     return (
         <div className="container-fluid bg-container">
             <div className='row'>

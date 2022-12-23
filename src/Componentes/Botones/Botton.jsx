@@ -3,7 +3,7 @@ const Botton = (props) => {
     return (
         <>
             <button className="btn" onClick={props.evento}>
-            <i className={props.clase}/>
+                <i className={props.clase} />
             </button>
         </>
     );

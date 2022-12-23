@@ -1,3 +1,4 @@
+/* Spinner de cargando */
 const Loader=(props)=>{
     return(
         <div className="text-center">
