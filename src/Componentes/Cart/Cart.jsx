@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useContext } from "react";
 import cartContext from "../../Context/CartContext";
 import Botton from "../Botones/Botton";

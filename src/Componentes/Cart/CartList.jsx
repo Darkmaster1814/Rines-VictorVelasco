@@ -8,7 +8,8 @@ const CartList = () => {
     const [counter, setCounter] = useState("")//Contador de articulos
     useEffect(() => {
         ContextoCarrito.cantidadEnCarrito(ContextoCarrito.carrito) !== 0 ? setCounter(`${ContextoCarrito.cantidadEnCarrito(ContextoCarrito.carrito)} Articulos`) : setCounter("");
-    }, [ContextoCarrito.cantidadEnCarrito(ContextoCarrito.carrito), counter])
+    }, [ContextoCarrito.carrito,counter])
+
     /* State y effect para calcular el subtotal */
     const [subTotal,setSubTotal]=useState("");//Subtotal del carrito de compras
 /* Render del subtotal */

@@ -35,10 +35,10 @@ const Provider = ({ children }) => {
         return (Object.keys(carrito).length);
     }
     /* Función para borrar el objeto del carrito */
-    const removeFromCart = (idP) => { 
-        let indexToRemove = carrito.findIndex((item) => Number(item.id) === Number(idP));//Encuentra el indice a borrar por id
+    const removeFromCart = (idP) => { /* Realizar un filter para regresar los elementos donde el id!=al idp y luego ingresar el valor filtrado al set */
+        let cartFiltered = carrito.filter((item)=>Number(item.id)!==Number(idP))//Encuentra el indice a borrar por id
         localStorage.clear();
-        carrito.splice(indexToRemove, 1);//Remueve el producto del arreglo;
+        setCarrito(cartFiltered);//Se ingresa el carrito filtrado como set
         actualizarProductosStorage(carrito);//Actualiza el storage con los productos
         console.log("Se elimino un articulo del carrito", carrito);
     }

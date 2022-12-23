@@ -10,9 +10,9 @@ const ItemCount = (props) => {
         /* Variable para agregar al carrito la onAdd */
         let carrito=useContext(cartContext);
     /* Variable de cantidad, esta será puesta en el state para cambiar su estado cada que se agrega un producto */
-    let [qty, setQty]=useState(props.producto?.cantidad-(carrito.cantidadEnCarrito(carrito.carrito)!==0 ? carrito.obtenerPorId(props.producto?.id).cantidad:0))//Se usa tambien la cantidad en el carrito para restringir la cantidad que puede agregar el usuario
+    let [qty, setQty]=useState(null)//Se usa tambien la cantidad en el carrito para restringir la cantidad que puede agregar el usuario
     /* UseEffect para montar la cantidad y renderizar cada que haya un cambio en esta al agregar a carrito */
-    useEffect(()=>setQty(props.producto?.cantidad),[props.producto?.cantidad])
+    useEffect(()=>setQty(props.producto?.cantidad-(carrito.existeEnCarrito(props.producto?.id) ? carrito.obtenerPorId(props.producto?.id).cantidad : 0)),[props.producto?.cantidad,carrito.carrito])
     /* Variable de contador de productos en el state */
     let [contador, setContador] = useState(1);
     /* Funcion para aumentar los productos antes de agregarlos al carrito */
