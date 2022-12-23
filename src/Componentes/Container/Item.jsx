@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';//link para el routering
 const Item = (props) => {
     return (
-        <div className={props.columnas} id={props.producto.id}>
+        <div key={props.producto.id} className={props.columnas}>
             <div className="card bg-container" style={{ width: "18rem" }}>
                 <div className="row">
                     <div className="col-md-12 text-center">

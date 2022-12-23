@@ -3,8 +3,15 @@ import { useEffect,useState } from "react";
 import cartContext from "./CartContext";
 
 const Provider = ({ children }) => {
+    /* Provider del local storage para guardar en el state el carrito de compras y hacerlo persistente */
+    const obtenerCarritoStorage=()=> {
+        let carritoJSON = localStorage.getItem("carrito");
+        if (carritoJSON) {
+            return(JSON.parse(carritoJSON));
+        }
+    } 
     /* Variable para agregar al carrito la onAdd */
-    const [carrito, setCarrito] = useState([]);
+    const [carrito, setCarrito] = useState(obtenerCarritoStorage()===undefined ?[]: obtenerCarritoStorage());
     /* Función agregar al arreglo de carrito */
     const addItem = (item) => {
         /* Si el carrito tiene item entonces actualiza la cantidad */

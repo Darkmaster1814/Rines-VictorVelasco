@@ -28,25 +28,17 @@ const CartList = () => {
 /* Effect del subtotal */
     useEffect(()=>{
         ContextoCarrito.cantidadEnCarrito(ContextoCarrito.carrito) !== 0 ? setSubTotal(renderSubtotal()): setSubTotal("");
-    },[ContextoCarrito.carrito])
+    },[ContextoCarrito.carrito, counter])
 /* State para el boton de comprar o de regresar a inicio */
     const [bottonComprar, setBotonComprar]=useState("");
 /* Effect para el boton condicional */
     useEffect(()=>{
-        ContextoCarrito.cantidadEnCarrito(ContextoCarrito.carrito) !== 0 ? setBotonComprar(<BottonClassic clase="container-fluid rounded bg-item" texto="COMPRAR"/>) :setBotonComprar(<Link to="/"><BottonClassic clase="container-fluid rounded bg-item" texto="VOLVER A INICIO"/></Link>)
+        ContextoCarrito.cantidadEnCarrito(ContextoCarrito.carrito) !== 0 ? setBotonComprar(<BottonClassic clase="container-fluid rounded bg-item mb-4" texto="COMPRAR"/>) :setBotonComprar(<Link to="/"><BottonClassic clase="container-fluid rounded bg-item" texto="VOLVER A INICIO"/></Link>)
     },[ContextoCarrito.carrito])
 /* Renderizado de las card del carrito */
     const renderCards = () => {
         return (ContextoCarrito.carrito.map((item) => <Cart producto={item} />))
     }
-
-    /*    const obtenerCarritoStorage=()=> {
-            let carritoJSON = localStorage.getItem("carrito");
-            if (carritoJSON) {
-                return(JSON.parse(carritoJSON));
-            }
-        } 
-        const [carrito,setCarrito]=useState(null);//State del render de card para el carrito */
 
     return (<div className='row'>
         <h3>{counter}</h3>

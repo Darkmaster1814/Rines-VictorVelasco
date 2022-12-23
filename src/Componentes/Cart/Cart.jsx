@@ -5,7 +5,7 @@ const Cart=(props)=>{
     const ContextoCarrito=useContext(cartContext)
 
     const renderCard=()=>{
-        return(<div className='card'>
+        return(<div className='card' key={props.producto.id}>
         <div className='row'>
             <div className="col-4">
                 <img src={props.producto.imagen} style={{ width: "180px" }} alt=" producto carrito de compras" />

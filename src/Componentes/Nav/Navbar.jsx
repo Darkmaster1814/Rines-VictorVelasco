@@ -37,9 +37,11 @@ const NAV = () => {
               <Cart nombre="CARRITO" />
             </li>
             </Link>
+            <Link to='/login'>
             <li className="nav-item">
-              <ButtonWidget nombre="LOG-IN" evento={() => { alert("Abriste la sección de iniciar sesión") }} tipo="nav-i fa-solid fa-right-to-bracket" />
+              <ButtonWidget nombre="LOG-IN" tipo="nav-i fa-solid fa-right-to-bracket" />
             </li>
+            </Link>
           </ul>
         </div>
       </nav>
