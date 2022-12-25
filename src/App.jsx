@@ -5,15 +5,19 @@ import './CSS/App.css';
 /* Importaión de componentes */
 import Navbar from './Componentes/Nav/Navbar';
 import {Routes,Route} from 'react-router-dom';//Importar react router
-import ItemListContainer from './Componentes/Products/ItemListContainer'
-import ItemDetailContainer from './Componentes/Products/ItemDetailContainer';
+import ItemListContainer from './Componentes/Product/ItemListContainer'
+import ItemDetailContainer from './Componentes/Product/ItemDetailContainer';
 import Footer from './Componentes/Footer/Footer';
 import CartProvider from './Context/CartProvider';//Importamos el contexto del carrito
 import CartContainer from './Componentes/Cart/CartContainer';
+import LoginContext from './Context/LoginContext';
+import LoginProvider from './Context/LoginProvider';
 import LoginContainer from './Componentes/Login/LoginContainer';
+import OrderContainer from './Componentes/Order/OrderContainer';
 function App() {
   return (
     <>
+    <LoginProvider>
     <CartProvider>
       <Navbar/>
       <Routes>
@@ -22,10 +26,11 @@ function App() {
       <Route path='/item/:id' element={<ItemDetailContainer/>}/>
       <Route path='/cart' element={<CartContainer/>}/>
       <Route path='/login' element={<LoginContainer/>}/>
+      <Route path='/cart/order' element={<OrderContainer/>}/>
     </Routes>
     </CartProvider>
+    </LoginProvider>
     <Footer/>
-    
     </>
   );
 }

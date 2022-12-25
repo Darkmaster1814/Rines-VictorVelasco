@@ -3,8 +3,10 @@ import cartContext from '../../Context/CartContext';//Para obtener cuando se agr
 import Cart from './Cart';
 import BottonClassic from "../Botones/BottonClassic";
 import { Link } from 'react-router-dom';
+import LoginContext from '../../Context/LoginContext';
 const CartList = () => {
     const ContextoCarrito = useContext(cartContext);//Importamos el carrito de compras desde su contexto
+    const ContextoLogin=useContext(LoginContext);//Importamos el contexto del login para dar funcionalidad al boton de comprar con el routering(Si login true: envia a compra false: envia a Ingresar)
     const [counter, setCounter] = useState("")//Contador de articulos
     useEffect(() => {
         ContextoCarrito.cantidadEnCarrito(ContextoCarrito.carrito) !== 0 ? setCounter(`${ContextoCarrito.cantidadEnCarrito(ContextoCarrito.carrito)} Articulos`) : setCounter("");
@@ -32,7 +34,7 @@ const CartList = () => {
     const [bottonComprar, setBotonComprar] = useState("");
     /* Effect para el boton condicional */
     useEffect(() => {
-        ContextoCarrito.cantidadEnCarrito(ContextoCarrito.carrito) !== 0 ? setBotonComprar(<BottonClassic clase="container-fluid rounded bg-item mb-4" texto="COMPRAR" />) : setBotonComprar(<Link to="/"><BottonClassic clase="container-fluid rounded bg-item" texto="VOLVER A INICIO" /></Link>)
+        ContextoCarrito.cantidadEnCarrito(ContextoCarrito.carrito) !== 0 ? setBotonComprar(ContextoLogin.isLoggedin ? <Link to="/cart/order"><BottonClassic clase="container-fluid rounded bg-item mb-4" texto="COMPRAR"/></Link>:<Link to="/login"><BottonClassic clase="container-fluid rounded bg-item mb-4" texto="COMPRAR"/></Link>) : setBotonComprar(<Link to="/"><BottonClassic clase="container-fluid rounded bg-item" texto="VOLVER A INICIO"/></Link>)
     }, [ContextoCarrito.carrito])
     /* Renderizado de las card del carrito */
     const renderCards = () => {
