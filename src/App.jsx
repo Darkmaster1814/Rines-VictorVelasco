@@ -10,10 +10,9 @@ import ItemDetailContainer from './Componentes/Product/ItemDetailContainer';
 import Footer from './Componentes/Footer/Footer';
 import CartProvider from './Context/CartProvider';//Importamos el contexto del carrito
 import CartContainer from './Componentes/Cart/CartContainer';
-import LoginContext from './Context/LoginContext';
 import LoginProvider from './Context/LoginProvider';
 import LoginContainer from './Componentes/Login/LoginContainer';
-import OrderContainer from './Componentes/Order/OrderContainer';
+import OrderContainer from './Componentes/Checkout/OrderContainer';
 function App() {
   return (
     <>

@@ -2,29 +2,32 @@
 import { useEffect, useState } from 'react';//hook de useefect y usestate
 import { useParams } from 'react-router-dom';//hook para mandar props a un router
 import Loader from '../Loader/Loader';
-import Item from "./Item"
+import Item from "./Item";
+import { getFirestore } from 'firebase/firestore';//Importamos firestore
+import { getAllProducts } from '../../Queries/productos';//Importamos las querys para la db
+import { getProductsByCategory } from '../../Queries/productos';
 const ItemList = (props) => {
     const { categorias } = useParams();//hook de use params para obtener las variables de la url del router y seleccionar el filtro de productos en la api
     /* Creación de variable de estado para almacenar el json de productos */
     const [productos, setProductos] = useState(null);
-    /* Creación de variable de estado para construir petición de json productos */
-    const [categoria, setCategoria] = useState("productos")
-    /* useEffect para montar el string de la petición cada que cambie el params */
-    useEffect(() => {
-        categorias === undefined ? setCategoria("productos") : setCategoria(`productos?categoria=${categorias}`);
-    }, [categorias]);
-    /* Obtención asincronica de productos usando el mount para renderizar al comienzo una vez recibida la info desde mockapi */
-    useEffect(() => {
-        fetch(`https://63881b6ed94a7e5040931cad.mockapi.io/${categoria}`)
-            .then((respuesta) => respuesta.json()/* convertir de response a objeto json */)
-            .then((respuesta) => {
-                setProductos(respuesta)
+    /* Obtencion asincrona de la DB usando un serverless service Firebase */
+    useEffect(()=>{
+        /* Obtencion de la base de datos de firebase */
+        const db=getFirestore();
+        /* Si es undefined hace referencia a todos los productos, de lo contrario el params tiene un valor de category para hacer una query */
+        if(categorias===undefined){
+            getAllProducts(db).then((products)=>{
+                setProductos(products);
             })
-            .catch((error) => {
-                console.error("Error al consultar la API: ", error)
+        }
+        else{
+            getProductsByCategory(db,categorias).then((products)=>{
+                setProductos(products);
             })
-    }, [categoria])
-    const renderCards = () => {/* condicional de render para ir cargando cada sección de busqueda */
+        }
+    },[categorias]);
+    /* condicional de render para ir cargando cada sección de busqueda */
+    const renderCards = () => {
         return (productos?.map((item) => <Item producto={item} columnas={props.columnas} />));
     }
     /* se va ir renderizando diferentes cards */
