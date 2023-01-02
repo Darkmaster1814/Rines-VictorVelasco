@@ -5,7 +5,6 @@ let LoginContext = createContext({
     onLogIn: () => { },
     onLogOut: () => { },
     usuarios: [],
-    obtenerUsuarioPorEmail: () => { },
     agregarNuevoUsuario: () => { },
     mail:null
 });

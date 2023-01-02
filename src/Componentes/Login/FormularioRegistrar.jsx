@@ -1,26 +1,32 @@
 import BottonClassic from "../Botones/BottonClassic";
 import { useContext } from "react";
 import LoginContext from "../../Context/LoginContext";
+import { initializeApp } from "firebase/app";//Funcionalidades de firebase
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";//Modulo de autenticacion firebase
 const FormularioRegistrar=()=>{
     const ContextoLogin=useContext(LoginContext);
-    /* Clase constructora para el objeto de usuario */
-    class Usuario{
-        constructor(...user){
-            this.email=user[0];
-            this.password=user[1];
-            this.nombre=user[2];
-            this.apellido=user[3];
-            this.direccion=user[4];
-            this.ciudad=user[5];
-            this.pais=user[6]
-            this.cp=user[7];
-            this.telefono=user[8];
-        }
-    }
     const registrar=(event)=>{
         event.preventDefault()
-        ContextoLogin.agregarNuevoUsuario(new Usuario(event.target[0].value, event.target[1].value, event.target[2].value, event.target[3].value, event.target[4].value, event.target[5].value, event.target[6].value, event.target[7].value, event.target[8].value));
+        const auth=getAuth();
+        createUserWithEmailAndPassword(auth,event.target[0].value,event.target[1].value).
+        then((userCredential)=>{
+            /* Inició sesion */
+        ContextoLogin.agregarNuevoUsuario({
+            "email": event.target[0].value,
+            "nombre": event.target[2].value,
+            "apellido":event.target[3].value,
+            "direccion":event.target[4].value,
+            "ciudad":event.target[5].value,
+            "pais":event.target[6].value,
+            "cp": event.target[7].value,
+            "telefono":event.target[8].value,
+        });
         document.getElementById("Registrar").reset();
+            alert(`${userCredential.user.email} registrado con éxito`);
+        }).catch((error)=>{
+            console.log(error.code,error.message);
+            alert(`${error.message}`); 
+        })
     }
     const renderFormRegistrar = () => {
             /* Form para registrarse */

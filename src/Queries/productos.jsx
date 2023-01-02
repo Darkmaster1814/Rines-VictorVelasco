@@ -5,9 +5,9 @@ import {collection, doc, getDoc, setDoc, where, query, deleteDoc, getDocs, snaps
 const Collection="productos";
 
 /* Query obtener todos los productos de la collection */
-export const getAllProducts=(db)=>{
+export const getAllProducts= async(db)=>{
     const collectionReference= collection(db, Collection);
-    return getDocs(collectionReference)
+    return await getDocs(collectionReference)
     .then((snapshot)=>{
         const products=[];
         snapshot?.docs?.forEach((item)=>{
@@ -23,14 +23,13 @@ export const getAllProducts=(db)=>{
 
 /* Obtener producto por id */
 
-export const getProductById=(db,id)=>{
+export const getProductById=async (db,id)=>{
     const collectionReference= doc(db,Collection,id);/* Obtener la referencia el documento por id */
     /* obtener el documento con la referencia */
-    return getDoc(collectionReference)
+    return await getDoc(collectionReference)
     .then((item)=>{
         if(item.exists){
             return{
-                id:item.id,
                 ...item.data()
             }
         }
@@ -38,13 +37,13 @@ export const getProductById=(db,id)=>{
 }
 
 /* Obtener productos por categoria */
-export const getProductsByCategory=(db,category)=>{
+export const getProductsByCategory=async (db,category)=>{
     /* Obtener la referencia de los documentos que cumplan la query */
     const collectionReference=query(
         collection(db, Collection),
         where('categoria','==',category)
     )/* Obtener la collection de documentos que cumplen con la query */
-    return getDocs(collectionReference)
+    return await getDocs(collectionReference)
     .then((snapshot)=>{
         const products=[];
         snapshot?.docs?.forEach((item)=>{
@@ -58,4 +57,9 @@ export const getProductsByCategory=(db,category)=>{
     .catch((error)=>{
         return error;
     })
+}
+
+/* Set products para actualizar inventario */
+export const setProductById=async(db,id,data)=>{
+return await setDoc(doc(db,Collection,id), data).then((data)=>console.log("Información actualizada")).catch((error)=>console.log("Error al actualizar producto",error));
 }
