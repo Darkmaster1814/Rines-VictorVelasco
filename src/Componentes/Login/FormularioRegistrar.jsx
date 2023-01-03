@@ -1,15 +1,15 @@
 import BottonClassic from "../Botones/BottonClassic";
 import { useContext } from "react";
 import LoginContext from "../../Context/LoginContext";
-import { initializeApp } from "firebase/app";//Funcionalidades de firebase
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";//Modulo de autenticacion firebase
+import { alertExito, alertFracaso } from "../Alerts/Alertas";
 const FormularioRegistrar=()=>{
     const ContextoLogin=useContext(LoginContext);
     const registrar=(event)=>{
         event.preventDefault()
         const auth=getAuth();
-        createUserWithEmailAndPassword(auth,event.target[0].value,event.target[1].value).
-        then((userCredential)=>{
+        createUserWithEmailAndPassword(auth,event.target[0].value,event.target[1].value)
+        .then((userCredential)=>{
             /* Inició sesion */
         ContextoLogin.agregarNuevoUsuario({
             "email": event.target[0].value,
@@ -22,10 +22,10 @@ const FormularioRegistrar=()=>{
             "telefono":event.target[8].value,
         });
         document.getElementById("Registrar").reset();
-            alert(`${userCredential.user.email} registrado con éxito`);
+            alertExito(`${userCredential.user.email} registrado con éxito`);
         }).catch((error)=>{
             console.log(error.code,error.message);
-            alert(`${error.message}`); 
+            alertFracaso(`${error.message}`); 
         })
     }
     const renderFormRegistrar = () => {

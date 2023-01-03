@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useEffect } from 'react';
 import { useContext } from 'react';//Importamos el contexto
 import cartContext from '../../Context/CartContext';
+import {alertFracaso } from '../Alerts/Alertas';
 const ItemCount = (props) => {
     /* Variable para agregar al carrito la onAdd */
     let carrito = useContext(cartContext);
@@ -36,14 +37,14 @@ const ItemCount = (props) => {
             let idProducto = props.producto?.id;
             let nombreProducto = props.producto?.nombre;
             let imagenProducto = props.producto?.imagen;
-            let precioProducto = props.producto?.precio;
+            let precioProducto = props.producto?.precio; 
             let cantidadProducto = contador;
             /* Función sacada del context del carrito para agregar un objeto */
             carrito.agregarCarrito(new Carrito(idProducto, nombreProducto, precioProducto, cantidadProducto, imagenProducto));//Función para agregar al carrito un objeto
             setQty(qty - contador);
             setContador(1);
         }
-        else { alert("Sin stock") }
+        else { alertFracaso("No hay stock") }
     }
     return (
         <div className="col-md-12">
