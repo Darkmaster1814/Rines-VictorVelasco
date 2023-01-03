@@ -3,6 +3,7 @@ import { useContext } from "react";
 import LoginContext from "../../Context/LoginContext";
 import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";//Ingresar con usuario in contraseña en firebase
 import { useState } from "react";
+import { alertExito, alertFracaso } from "../Alerts/Alertas";
 const FormularioIngresar = () => {
     const ContextoLogin = useContext(LoginContext);//USar el context de login para acceder al array usuarios y sus metodos
     /* Ingresar */
@@ -14,7 +15,7 @@ const FormularioIngresar = () => {
         if (tooManyAtempts) {
             sendPasswordResetEmail(auth,event.target[0].value)
                 .then((user) => {
-                    alert(`Por favor revisa la bandeja de entrada de ${event.target[0].value}`)
+                    alertExito(`Revisa la bandeja de entrada de ${event.target[0].value}`)
                     document.getElementById("Ingresar").reset();
                 }).catch((error) => {
                     console.log(error)
@@ -24,13 +25,13 @@ const FormularioIngresar = () => {
             signInWithEmailAndPassword(auth, event.target[0].value, event.target[1].value)
                 .then((useCredentials) => {
                     //Inicio sesión
-                    console.log(useCredentials.user.email);
+
                     ContextoLogin.onLogIn(useCredentials.user.email);
                     document.getElementById("Ingresar").reset();
                 }).catch((error) => {
                     console.log(error.code, error.message)
-                    error.code === 'auth/wrong-password' && alert("Contraseña incorrecta");
-                    error.code === 'auth/user-not-found' && alert("El email no existe registrelo para acceder");
+                    error.code === 'auth/wrong-password' && alertFracaso("Contraseña incorrecta");
+                    error.code === 'auth/user-not-found' && alertFracaso("El email no existe registrelo para acceder");
                     error.code === 'auth/too-many-requests' && setTooManyAtempts(true);
                 });
         }
@@ -51,7 +52,7 @@ const FormularioIngresar = () => {
                 <input type="password" name="password" className="form-control border-0 mb-0" id="pwd" placeholder="Password" required />
                 <hr className="mt-0" />
             </div>
-            <div className="container-fluid mb-5"><div className="row"><div className="col-12">{tooManyAtempts == false ? (!ContextoLogin.isLoggedin ? <BottonClassic type="submit" clase="container-fluid rounded bg-item" texto="LOG IN" /> : <BottonClassic evento={ContextoLogin.onLogOut} clase="container-fluid rounded bg-item" texto="LOG OUT" />) : <BottonClassic type="submit" clase="container-fluid rounded bg-item" texto="OLVIDE MI CONTRASEÑA" />}</div></div></div>
+            <div className="container-fluid mb-5"><div className="row"><div className="col-12">{tooManyAtempts === false ? (!ContextoLogin.isLoggedin ? <BottonClassic type="submit" clase="container-fluid rounded bg-item" texto="LOG IN" /> : <BottonClassic evento={ContextoLogin.onLogOut} clase="container-fluid rounded bg-item" texto="LOG OUT" />) : <BottonClassic type="submit" clase="container-fluid rounded bg-item" texto="OLVIDE MI CONTRASEÑA" />}</div></div></div>
         </form>)
     }
     return (<>{renderFormIngresar()}</>)

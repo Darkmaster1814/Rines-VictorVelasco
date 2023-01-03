@@ -2,6 +2,7 @@ import { useState } from "react";
 import loginContext from "./LoginContext";
 import { getFirestore } from 'firebase/firestore';//Importamos firebase para acceder y agregar la información de usuarios
 import { getUserByEmail, setUserByEmail } from "../Queries/usuarios";
+import { alertExito } from "../Componentes/Alerts/Alertas";
 const Provider = ({ children }) => {
     const [usuarios, setUsuarios] = useState([]);//Usuario registrado
     const [mail,setMail]=useState(null);//Para guardar el main del usuario logeado
@@ -11,7 +12,7 @@ const Provider = ({ children }) => {
         setLoggedin(false);
         setMail(null);
         setUsuarios([]);
-        alert("Ha cerrado sesión");
+        alertExito("Ha cerrado sesión");
     }
     /* El usuario a cerrado sesión */
     const loginHandler=(email)=>{
@@ -21,7 +22,7 @@ const Provider = ({ children }) => {
                 setMail(email);
                 getUserByEmail(db,email).then((item)=>{
                     setUsuarios(item);//Agregar la información del usuario a traves de firebase y su email
-                    alert("Ha ingresado con el correo",email);
+                    alertExito("Ha ingresado con el correo",email);
                 })
     }
     /* Registrar un nuevo usuario */
@@ -47,4 +48,3 @@ const Provider = ({ children }) => {
 }
 
 export default Provider;
-

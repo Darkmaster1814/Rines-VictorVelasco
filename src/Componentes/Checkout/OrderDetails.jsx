@@ -6,6 +6,7 @@ import { getFirestore } from 'firebase/firestore';
 import {setOrders} from '../../Queries/ordenes';//Querys para agregar orden de compra a la db en firebase
 import {getProductById,setProductById} from '../../Queries/productos';
 import { Link } from "react-router-dom";
+import { alertExito, alertWarning } from "../Alerts/Alertas";
 const OrderDetails = () => {
     const ContextoCarrito = useContext(cartContext);//Contexto del carrito para calcular el subtotal y total de compra del carrito
     const ContextoLogin=useContext(LoginContext)//Contexto del login para acceder a los datos de envío
@@ -35,8 +36,9 @@ const generateBuyOrder=()=>{
             "cantidad":parseFloat(item.cantidad-producto.cantidad),
             "precio": parseFloat(item.precio),
             "imagen":item.imagen}))
-        
     })
+    alertWarning("Serás redireccionado a la aplicación de pago");
+    alertExito("Orden de compra realizada con éxito");
     localStorage.clear();//Limpiar el carrito
     ContextoCarrito.borrarCarrito();//Borrar carrito
 }

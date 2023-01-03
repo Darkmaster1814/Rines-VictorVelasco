@@ -1,5 +1,6 @@
 /* Provider para el contexto dinamico de carrito de compras */
 import { useEffect,useState } from "react";
+import { alertExito } from "../Componentes/Alerts/Alertas";
 import cartContext from "./CartContext";
 
 const Provider = ({ children }) => {
@@ -25,7 +26,7 @@ const Provider = ({ children }) => {
         else {
             setCarrito((items) => [...items, item]);//Agrega al arr carrito un nuevo objeto item
         }
-        console.log(Object.keys(carrito).length + 1)//Para saber el tamaño del array del carrito
+        alertExito(`${item.nombre} agregado al carrito`)
     }
 
     /* Función para verificar si el producto ya ha sido agregado al carrito */
@@ -47,7 +48,7 @@ const Provider = ({ children }) => {
         localStorage.clear();
         setCarrito(cartFiltered);//Se ingresa el carrito filtrado como set
         actualizarProductosStorage(carrito);//Actualiza el storage con los productos
-        console.log("Se elimino un articulo del carrito", carrito);
+        alertExito(`Producto Eliminado del carrito`);
     }
     /* Función de borrar todo el carrito */
     const clearCart = () => { 
