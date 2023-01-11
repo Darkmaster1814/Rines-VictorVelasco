@@ -1,19 +1,21 @@
 /* Componente de cantidad en cada descripción de carrito para agregar mas o menos productos */
-import Botton from '../Botones/Botton';
-import BottonClassic from "../Botones/BottonClassic";
+import Botton from '../../Botones/Botton';
+/* Componente de cantidad agregar ala carrito, posee dos botones para agregar mas o menos cantidad a carrito y un boton para agregar al carrito y seguir comprando o comprar para ingresar directamente al carrito agregando la cantidad dada el en counter  */
+/* Importación de librerías */
 import { Link } from 'react-router-dom';//libreria de link para las rutas
-import { useState } from "react";
-import { useEffect } from 'react';
-import { useContext } from 'react';//Importamos el contexto
-import cartContext from '../../Context/CartContext';
-import {alertFracaso } from '../Alerts/Alertas';
+import { useState, useEffect, useContext } from "react";
+/* Importación de contexto */
+import cartContext from '../../../Context/CartContext';
+/* Importación de componentes */
+import { alertFracaso } from '../../Alerts/Alertas';
+import BottonClassic from "../../Botones/BottonClassic";
+
 const ItemCount = (props) => {
-    /* Variable para agregar al carrito la onAdd */
-    let carrito = useContext(cartContext);
+    let carrito = useContext(cartContext);/* Variable para agregar al carrito la onAdd */
     /* Variable de cantidad, esta será puesta en el state para cambiar su estado cada que se agrega un producto */
     let [qty, setQty] = useState(null)//Se usa tambien la cantidad en el carrito para restringir la cantidad que puede agregar el usuario
     /* UseEffect para montar la cantidad y renderizar cada que haya un cambio en esta al agregar a carrito */
-    useEffect(() => setQty(props.producto?.cantidad - (carrito.existeEnCarrito(props.producto?.id) ? carrito.obtenerPorId(props.producto?.id).cantidad : 0)), [props.producto?.cantidad, carrito.carrito])
+    useEffect(() => setQty(props.producto?.cantidad - (carrito.existeEnCarrito(props.producto?.id) ? carrito.obtenerPorId(props.producto?.id).cantidad : 0)), [carrito, props.producto?.id, props.producto?.cantidad, carrito.carrito])
     /* Variable de contador de productos en el state */
     let [contador, setContador] = useState(1);
     /* Funcion para aumentar los productos antes de agregarlos al carrito */
@@ -21,33 +23,28 @@ const ItemCount = (props) => {
     /* Función para disminuir los productos antes de agregarlos al carrito */
     let disminuirCarrito = () => { contador > 1 ? setContador(--contador) : setContador(1) };
     /* Función para agregar al carrito */
-    /* Clase constructora para crear un objeto de carrito */
-    class Carrito {
-        constructor(...cart) {
-            this.id = cart[0];
-            this.nombre = cart[1];
-            this.precio = cart[2];
-            this.cantidad = cart[3];
-            this.imagen = cart[4];
-        }
-    }
-    /* Función OnClick para agregar al carrito */
     let agregarCarrito = () => {
         if (qty > 0) {
             let idProducto = props.producto?.id;
             let nombreProducto = props.producto?.nombre;
             let imagenProducto = props.producto?.imagen;
-            let precioProducto = props.producto?.precio; 
+            let precioProducto = props.producto?.precio;
             let cantidadProducto = contador;
             /* Función sacada del context del carrito para agregar un objeto */
-            carrito.agregarCarrito(new Carrito(idProducto, nombreProducto, precioProducto, cantidadProducto, imagenProducto));//Función para agregar al carrito un objeto
+            carrito.agregarCarrito({
+                "id": idProducto,
+                "nombre": nombreProducto,
+                "precio": precioProducto,
+                "cantidad": cantidadProducto,
+                "imagen": imagenProducto
+            });//Función para agregar al carrito un objeto
             setQty(qty - contador);
             setContador(1);
         }
         else { alertFracaso("No hay stock") }
     }
-    return (
-        <div className="col-md-12">
+    const renderAgregarCarrito = () => {
+        return (<div className="col-md-12">
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-6"><p> QTY: <Botton clase="fa-solid fa-plus" evento={() => { aumentarCarrito() }} /> {contador} <Botton clase="fa-solid fa-minus" evento={() => { disminuirCarrito() }} /></p></div>
@@ -56,6 +53,8 @@ const ItemCount = (props) => {
                 </div>
             </div>
         </div>)
+    }
+    return (<>{renderAgregarCarrito()}</>)
 }
 
 export default ItemCount;

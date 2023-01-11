@@ -1,4 +1,5 @@
-const Order=(props)=>{
+/* Card de cada articulo del carrito dentro del preview de orden de compra sin imagen */
+const Brief=(props)=>{
         /* Render de cada card del carrito */
         const renderCard = () => {
             return (<div className='card mt-2 mb-2' key={props.producto.id}>
@@ -16,4 +17,4 @@ const Order=(props)=>{
     return(<>{renderCard()}</>)
 }
 
-export default Order;
+export default Brief;

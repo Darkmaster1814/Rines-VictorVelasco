@@ -1,16 +1,23 @@
-import BottonClassic from "../Botones/BottonClassic";
+/* Formulario para registrar un nuevo usuario a la aplicación */
+/* Importación de librerias */
 import { useContext } from "react";
-import LoginContext from "../../Context/LoginContext";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";//Modulo de autenticacion firebase
+/* Importación de contexto */
+import LoginContext from "../../Context/LoginContext";
+/* Importación de componentes */
+import BottonClassic from "../Botones/BottonClassic";
 import { alertExito, alertFracaso } from "../Alerts/Alertas";
+
 const FormularioRegistrar=()=>{
-    const ContextoLogin=useContext(LoginContext);
+    const ContextoLogin=useContext(LoginContext);//Contexto de autenticación para acceder a funciones para registrar el la db y funcionalidades del contexto
+    /* Función para registrar los valores dados en el formulario  */
     const registrar=(event)=>{
         event.preventDefault()
         const auth=getAuth();
+        /* Crear un nuevo usuario usando firebase con el query, se usa el email como id */
         createUserWithEmailAndPassword(auth,event.target[0].value,event.target[1].value)
         .then((userCredential)=>{
-            /* Inició sesion */
+            /* Inició sesion y uso de función para agregar usuario nuevo a partir del contexto */
         ContextoLogin.agregarNuevoUsuario({
             "email": event.target[0].value,
             "nombre": event.target[2].value,
@@ -21,14 +28,15 @@ const FormularioRegistrar=()=>{
             "cp": event.target[7].value,
             "telefono":event.target[8].value,
         });
-        document.getElementById("Registrar").reset();
+        document.getElementById("Registrar").reset();//Reset al formulario
             alertExito(`${userCredential.user.email} registrado con éxito`);
         }).catch((error)=>{
             console.log(error.code,error.message);
             alertFracaso(`${error.message}`); 
         })
     }
-    const renderFormRegistrar = () => {
+
+    const renderFormularioRegistrarNuevoUsuario = () => {
             /* Form para registrarse */
         return (<form onSubmit={registrar} id="Registrar">
             <div className="form-group mt-4 mb-4">
@@ -70,7 +78,7 @@ const FormularioRegistrar=()=>{
             <div className="container-fluid mt-5 mb-5"><div className="row"><div className="col-12"><BottonClassic type="submit" clase="container-fluid rounded bg-item" texto="GUARDAR" /></div></div></div>
         </form>)
     }
-    return(<>{renderFormRegistrar()}</>)
+    return(<>{renderFormularioRegistrarNuevoUsuario()}</>)
 }
 
 export default FormularioRegistrar;

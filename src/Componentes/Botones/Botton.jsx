@@ -1,4 +1,4 @@
-/* Botones para todos los componentes y widgets */
+/* Componente de Botón, posee un icono sin texto */
 const Botton = (props) => {
     return (
         <>

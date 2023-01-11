@@ -1,12 +1,13 @@
-/* Alertas hechas con sweet alert */
+/* Alertas hechas con sweet alert para dar feedback al usuario cuando realice una acción */
+/* Importar libreria de sweet alert */
 import Swal from 'sweetalert2'
-
-export const alertExito=(message)=>{
+/* Alerta Exito */
+export const alertExito = (message) => {
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 3000,
+        timer: 1200,
         timerProgressBar: true,
     })
     Toast.fire({
@@ -14,14 +15,15 @@ export const alertExito=(message)=>{
         text: message
     })
 };
-
-export const alertFracaso=(message)=>{
+/* Alerta de Fracaso */
+export const alertFracaso = (message) => {
     Swal.fire({
         icon: 'error',
         title: message
     })
 }
-export const alertWarning=(message)=>{
+/* Alerta de advertencia */
+export const alertWarning = (message) => {
     Swal.fire({
         icon: 'warning',
         title: message

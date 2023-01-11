@@ -1,25 +1,20 @@
-import { Link } from "react-router-dom";
-import Botton from "../Botones/Botton";
-import CartList from "./CartList";
-
+/* Componente contenedor de cards de articulos agregados al carrito */
+/* Importación de componentes */
+import CartDetails from "./CartDetails";
+import BotonHeader from "../Botones/BottonHeader";
 const CartContainer = () => {
-    return (<div className="container-fluid">
-        <div className="row">
-            <div className="col-12 mb-3">
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-1 mt-2">
-                            <Link to="/"><Botton clase="fa-solid fa-angle-left fs-2" /></Link>
-                        </div>
-                        <div className="col-10 mt-2"><h3 className="text-center fs-2">Lista de compras</h3></div>
+    const renderContenedor = () => {
+        return (
+            <div className="container-fluid">
+                <div className="row">
+                    <BotonHeader link="/" texto="Lista de compras" />
+                    <div className="col-12">
+                        <CartDetails />
                     </div>
                 </div>
-            </div>
-            <div className="col-12">
-                <CartList />
-            </div>
-        </div>
-    </div>)
+            </div>)
+    }
+    return (<>{renderContenedor()}</>)
 }
 
 export default CartContainer;

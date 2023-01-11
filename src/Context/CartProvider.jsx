@@ -1,6 +1,9 @@
 /* Provider para el contexto dinamico de carrito de compras */
+/* Importación de librerías */
 import { useEffect,useState } from "react";
+/* Importación Componetes */
 import { alertExito } from "../Componentes/Alerts/Alertas";
+/* Importación del contexto */
 import cartContext from "./CartContext";
 
 const Provider = ({ children }) => {
@@ -40,14 +43,15 @@ const Provider = ({ children }) => {
     }
     /* Funcion para saber la cantidad de productos en el carrito */
     const QtyOfProducts = (carrito) => {
-        return (Object.keys(carrito).length);
+        let acumulador=0;
+        Object.keys(carrito).length !==0 && carrito.forEach((item)=> acumulador+=item.cantidad);
+        return acumulador;
     }
     /* Función para borrar el objeto del carrito */
     const removeFromCart = (idP) => { /* Realizar un filter para regresar los elementos donde el id!=al idp y luego ingresar el valor filtrado al set */
         let cartFiltered = carrito.filter((item)=>Number(item.id)!==Number(idP))//Encuentra el indice a borrar por id
         localStorage.clear();
         setCarrito(cartFiltered);//Se ingresa el carrito filtrado como set
-        actualizarProductosStorage(carrito);//Actualiza el storage con los productos
         alertExito(`Producto Eliminado del carrito`);
     }
     /* Función de borrar todo el carrito */
@@ -60,19 +64,16 @@ const Provider = ({ children }) => {
         carrito.forEach((item)=>total+=item.cantidad*item.precio);
         return total;
     }
-
-    /* actualizar el storage local con el JSON */
-    const actualizarProductosStorage = (carrito) => {
-        if (QtyOfProducts(carrito) === 0) {
-            localStorage.clear();
-        } else {
-            let productosJSON;
-            productosJSON = JSON.stringify(carrito);
-            localStorage.setItem("carrito", productosJSON);
-        }
-    }
         /* Effect para hacer un update al storage cada que el carrito cambia */
-        useEffect(() => actualizarProductosStorage(carrito), [carrito])
+        useEffect(() => {
+            if (QtyOfProducts(carrito) === 0) {
+                localStorage.clear();
+            } else {
+                let productosJSON;
+                productosJSON = JSON.stringify(carrito);
+                localStorage.setItem("carrito", productosJSON);
+            }
+        }, [carrito])
     return (<cartContext.Provider value={{
         carrito: carrito,
         agregarCarrito: addItem,

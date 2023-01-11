@@ -1,17 +1,21 @@
+/* Importación de librerías de la aplicación */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import App from './App';
-import {BrowserRouter} from 'react-router-dom';
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import {BrowserRouter} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+/* Importación de componentes */
+import App from './App';
+/* Importación de CSS */
+import './index.css';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+/* Configuración de firebase */
 const firebaseConfig = {
   apiKey: "AIzaSyBBBoTAU-pWmggNxr_0OSYdnbLB5eEBBE0",
   authDomain: "pistonsf1.firebaseapp.com",
@@ -25,6 +29,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+/* Crear raíz de render usando reactDom */
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>

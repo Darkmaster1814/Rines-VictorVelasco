@@ -1,4 +1,4 @@
-/* Widget las opciones en el nav */
+/* Componente de botón con widget, posee un icono en la parte superior y un texto en la parte inferior*/
 const ButtonWidget = (props) => {
     return (
         <>

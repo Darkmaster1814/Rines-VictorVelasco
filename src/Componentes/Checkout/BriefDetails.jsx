@@ -1,16 +1,22 @@
+/* Componente de detalles de compra tales como, nombre y datos del cliente, total a pagar y botones para generar orden de compra y proceder a pago */
+/* Importación de librerías */
 import { useContext } from "react";
-import cartContext from "../../Context/CartContext";
-import LoginContext from "../../Context/LoginContext";
-import BottonClassic from "../Botones/BottonClassic";
 import { getFirestore } from 'firebase/firestore';
+import { Link } from "react-router-dom";
+/* Importación de queries */
 import {setOrders} from '../../Queries/ordenes';//Querys para agregar orden de compra a la db en firebase
 import {getProductById,setProductById} from '../../Queries/productos';
-import { Link } from "react-router-dom";
-import { alertExito, alertWarning } from "../Alerts/Alertas";
-const OrderDetails = () => {
+/* Importación de contextos */
+import cartContext from "../../Context/CartContext";
+import LoginContext from "../../Context/LoginContext";
+/* Importación de componentes */
+import BottonClassic from "../Botones/BottonClassic";
+import {alertWarning } from "../Alerts/Alertas";
+
+const BriefDetails = () => {
     const ContextoCarrito = useContext(cartContext);//Contexto del carrito para calcular el subtotal y total de compra del carrito
     const ContextoLogin=useContext(LoginContext)//Contexto del login para acceder a los datos de envío
-    /* Función de prueba para calcular el costo de envio */
+    /* Función para calcular el costo de envio */
 const shippmentCost=()=>{
     let porcentajeEnvio=5;//Porcentaje de cobro de envio
     return(ContextoCarrito.calcularSubTotal()*(porcentajeEnvio/100));
@@ -19,8 +25,11 @@ const shippmentCost=()=>{
 const generateBuyOrder=()=>{
     let date=(new Date().getMinutes()+"-"+new Date().getHours()+"-"+(new Date().getDay()+1)+"-"+(new Date().getMonth()+1)+"-"+new Date().getFullYear())
     let orderFinal={
-        "usuario":ContextoLogin.usuarios,
+        "usuario":ContextoLogin.mail,
+        "envio":ContextoLogin.usuarios,
         "carrito":ContextoCarrito.carrito,
+        "fecha":new Date().toDateString(),
+        "estatus":"pendiente",
         "total":parseFloat(ContextoCarrito.calcularSubTotal())+parseFloat(shippmentCost())
     }/* Actualizar inventario en db */
     const db=getFirestore();
@@ -38,7 +47,6 @@ const generateBuyOrder=()=>{
             "imagen":item.imagen}))
     })
     alertWarning("Serás redireccionado a la aplicación de pago");
-    alertExito("Orden de compra realizada con éxito");
     localStorage.clear();//Limpiar el carrito
     ContextoCarrito.borrarCarrito();//Borrar carrito
 }
@@ -84,10 +92,10 @@ const generateBuyOrder=()=>{
                 </div>
             </div>
             <div className="col-12 mt-5 mb-5">
-                <Link to="/compras"><BottonClassic evento={() => generateBuyOrder()} clase="container-fluid rounded bg-item border-danger" texto="PROCEDER AL PAGO"/></Link>
+                <Link to="/cart/order"><BottonClassic evento={() => generateBuyOrder()} clase="container-fluid rounded bg-item border-danger" texto="PROCEDER AL PAGO"/></Link>
             </div>
         </div>
     </div>)
 }
 
-export default OrderDetails;
+export default BriefDetails;
