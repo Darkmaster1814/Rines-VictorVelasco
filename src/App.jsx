@@ -1,10 +1,9 @@
 /* Componente de la aplicación, desde aquí se hace la conexión hacia todos los componentes y rutas de la aplicación */
-/* Importación de librerias */
-import 'bootstrap/dist/css/bootstrap.min.css';
-/* Importación de estilos CSS */
-import './CSS/App.css';   
+/* Importar React Router */
+import { Routes, Route } from 'react-router-dom';
+
 /* Importación de componentes */
-import NavBar from './Componentes/Nav/NavBar';
+import NavBar from './Componentes/Nav/Navbar';
 import ItemListContainer from './Componentes/Product/Catalogo/ItemListContainer'
 import ItemDetailContainer from './Componentes/Product/ItemDetail/ItemDetailContainer';
 import Footer from './Componentes/Footer/Footer';
@@ -15,8 +14,10 @@ import CartProvider from './Context/CartProvider';
 import CartContainer from './Componentes/Cart/CartContainer';
 import LoginProvider from './Context/LoginProvider';
 import LoginContainer from './Componentes/Login/LoginContainer';
-/* Importar React Router */
-import { Routes, Route } from 'react-router-dom';
+/* Importación de librerias */
+import 'bootstrap/dist/css/bootstrap.min.css';
+/* Importación de estilos CSS */
+import './CSS/App.css';   
 /* Main Render function */
 function App() {
   return (

@@ -13,7 +13,7 @@ const Item = (props) => {
                         alt="producto imagen"
                     />
                 </div>
-                <Link to={"/item/" + props.producto.id}>
+                <Link to={`/item/${props.producto.id}`}>
                     <button className="btn col-md-12" style={{ width: "18rem" }}>
                         <div className="card-body bg-nav rounded-3">
                             <h4 className="card-title">{props?.producto?.nombre}</h4>
