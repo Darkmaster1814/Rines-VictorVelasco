@@ -10,12 +10,12 @@ import cartContext from '../../../Context/CartContext';
 import { alertFracaso } from '../../Alerts/Alertas';
 import BottonClassic from "../../Botones/BottonClassic";
 
-const ItemCount = (props) => {
+const ItemCount = ({producto}) => {
     let carrito = useContext(cartContext);/* Variable para agregar al carrito la onAdd */
     /* Variable de cantidad, esta será puesta en el state para cambiar su estado cada que se agrega un producto */
-    let [qty, setQty] = useState(null)//Se usa tambien la cantidad en el carrito para restringir la cantidad que puede agregar el usuario
+    let [qty, setQty] = useState(null);//Se usa tambien la cantidad en el carrito para restringir la cantidad que puede agregar el usuario
     /* UseEffect para montar la cantidad y renderizar cada que haya un cambio en esta al agregar a carrito */
-    useEffect(() => setQty(props.producto?.cantidad - (carrito.existeEnCarrito(props.producto?.id) ? carrito.obtenerPorId(props.producto?.id).cantidad : 0)), [carrito, props.producto?.id, props.producto?.cantidad, carrito.carrito])
+    useEffect(() => setQty(producto?.cantidad - (carrito.existeEnCarrito(producto?.id) ? carrito.obtenerPorId(producto?.id).cantidad : 0)), [carrito, producto.id, producto.cantidad, carrito.carrito]);
     /* Variable de contador de productos en el state */
     let [contador, setContador] = useState(1);
     /* Funcion para aumentar los productos antes de agregarlos al carrito */
@@ -25,10 +25,10 @@ const ItemCount = (props) => {
     /* Función para agregar al carrito */
     let agregarCarrito = () => {
         if (qty > 0) {
-            let idProducto = props.producto?.id;
-            let nombreProducto = props.producto?.nombre;
-            let imagenProducto = props.producto?.imagen;
-            let precioProducto = props.producto?.precio;
+            let idProducto = producto?.id;
+            let nombreProducto = producto?.nombre;
+            let imagenProducto = producto?.imagen;
+            let precioProducto = producto?.precio;
             let cantidadProducto = contador;
             /* Función sacada del context del carrito para agregar un objeto */
             carrito.agregarCarrito({
@@ -42,7 +42,7 @@ const ItemCount = (props) => {
             setContador(1);
         }
         else { alertFracaso("No hay stock") }
-    }
+    } 
     const renderAgregarCarrito = () => {
         return (<div className="col-md-12">
             <div className="container-fluid">

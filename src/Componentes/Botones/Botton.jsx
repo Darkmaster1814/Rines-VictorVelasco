@@ -1,9 +1,9 @@
 /* Componente de Botón, posee un icono sin texto */
-const Botton = (props) => {
+const Botton = ({evento,clase}) => {
     return (
         <>
-            <button className="btn" onClick={props.evento}>
-                <i className={props.clase} />
+            <button className="btn" onClick={evento}>
+                <i className={clase} />
             </button>
         </>
     );
